@@ -21,7 +21,7 @@ class Particle {
         this.x = x;
         this.y = y;
         this.size = Math.random() * 15 + 1;
-        this.weight = Math.random() * 1 + 1;
+        this.weight = Math.random() * 5 + 1;
         this.directionX = -2;
     }
 
@@ -58,8 +58,8 @@ function init() {
     particleArray = [];
     for (let i = 0; i < numberOfParticles; i++) {
         const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        particleArray.push(new Particle(x, y));
+        //const y = Math.random() * canvas.height;
+        particleArray.push(new Particle(x, 0));
     }
 }
 init();
