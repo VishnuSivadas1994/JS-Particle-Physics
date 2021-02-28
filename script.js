@@ -22,14 +22,14 @@ class Particle {
         this.y = y;
         this.size = Math.random() * 15 + 1;
         this.weight = Math.random() * 1 + 1;
-        this.directionX = -1;
+        this.directionX = -2;
     }
 
     update() {
         if (this.y > canvas.height) {
             this.y = 0 - this.size;
             this.weight = Math.random() * 1 + 1;
-            this.x = Math.random() * canvas.width * 1.2;
+            this.x = Math.random() * canvas.width * 2;
         }
         this.weight += 0.01;
         this.y += this.weight;
@@ -41,7 +41,7 @@ class Particle {
             this.y < title.y + title.height &&
             this.y + this.size > title.y
         ) {
-            this.y -= 3;
+            this.y -= 2;
             this.weight *= -0.3;
         }
     }
@@ -83,8 +83,15 @@ function animate() {
 animate();
 
 
-window.addEventListener('resize', function(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
+window.addEventListener('resize', function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    titleMeasurements = titleElement.getBoundingClientRect();
+    title = {
+        x: titleMeasurements.left,
+        y: titleMeasurements.top,
+        width: titleMeasurements.width,
+        height: 10
+    }
     init();
 });
