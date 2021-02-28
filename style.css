@@ -23,7 +23,7 @@
 
 }
 #title1::before{
-    content: 'is awesome';
+    content: 'by Vishnu Sivadas';
     position: absolute;
     bottom: -70px;
     font-size: 40px;

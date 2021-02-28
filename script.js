@@ -5,6 +5,7 @@ canvas.height = window.innerHeight;
 let particleArray = [];
 const numberOfParticles = 300;
 
+
 //measure title element
 let titleElement = document.getElementById('title1');
 let titleMeasurements = titleElement.getBoundingClientRect();
@@ -23,6 +24,8 @@ class Particle {
         this.size = Math.random() * 15 + 1;
         this.weight = Math.random() * 5 + 1;
         this.directionX = -2;
+        this.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+
     }
 
     update() {
@@ -47,7 +50,7 @@ class Particle {
     }
 
     draw() {
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
