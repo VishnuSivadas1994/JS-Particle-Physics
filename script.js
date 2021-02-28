@@ -5,6 +5,15 @@ canvas.height = window.innerHeight;
 let particleArray = [];
 const numberOfParticles = 300;
 
+//measure title element
+let titleElement = document.getElementById('title1');
+let titleMeasurements = titleElement.getBoundingClientRect();
+let title = {
+    x: titleMeasurements.left,
+    y: titleMeasurements.top,
+    width: titleMeasurements.width,
+    height: 10
+}
 
 
 class Particle {
@@ -22,9 +31,19 @@ class Particle {
             this.weight = Math.random() * 1 + 1;
             this.x = Math.random() * canvas.width * 1.2;
         }
-        this.weight += 0.05;
+        this.weight += 0.01;
         this.y += this.weight;
         this.x += this.directionX;
+        //check for collision
+        if (
+            this.x < title.x + title.width &&
+            this.x + this.size > title.x &&
+            this.y < title.y + title.height &&
+            this.y + this.size > title.y
+        ) {
+            this.y -= 3;
+            this.weight *= -0.3;
+        }
     }
 
     draw() {
@@ -36,6 +55,7 @@ class Particle {
     }
 }
 function init() {
+    particleArray = [];
     for (let i = 0; i < numberOfParticles; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
@@ -55,8 +75,16 @@ function animate() {
         particleArray[i].update();
         particleArray[i].draw();
     }
+    //ctx.fillRect(title.x,title.y,title.width,title.height);
     requestAnimationFrame(animate);
 }
 
 
 animate();
+
+
+window.addEventListener('resize', function(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    init();
+});
